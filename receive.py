@@ -17,21 +17,25 @@ try:
         if msg is None:
             print("Timeout occurred, no message.")
             continue
-            
+
         if msg.arbitration_id == 0x3E0:
             print(f"Received message: {msg}")
-            
+
             # Extract bits 0-1 from the first byte of data
             # This gets the 2 least significant bits (0 and 1)
             value = msg.data[0] & 0b00000011
-            
+
             # Divide by 10
-            result = value / 10.0
-            
+            kelvin = value / 10.0
+
+            # Convert from Kelvin to Celsius
+            celsius = kelvin - 273.15
+
             print(f"Extracted value (bits 0-1): {value}")
-            print(f"Result after division by 10: {result}")
+            print(f"Temperature in Kelvin: {kelvin}")
+            print(f"Temperature in Celsius: {celsius}")
             break
-            
+
 except KeyboardInterrupt:
     print("Program terminated by user")
 finally:
