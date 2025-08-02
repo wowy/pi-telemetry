@@ -1,5 +1,6 @@
 import os
 import can
+from can.typechecking import CanFilter
 import time
 import struct
 import logging
@@ -22,32 +23,36 @@ try:
     os.system("sudo ip link set can0 type can bitrate 100000")
     os.system("sudo ifconfig can0 up")
 
-    can0 = can.interface.Bus(channel="can0", bustype="socketcan")  # socketcan_native
+    can0 = can.interface.Bus(
+        channel="can0", interface="socketcan"
+    )  # Updated to use 'interface' instead of deprecated 'bustype'
     logger.info("CAN interface initialized successfully")
 except Exception as e:
     logger.error(f"Failed to initialize CAN interface: {e}")
     sys.exit(1)
 
-# Set up filters for all required message IDs
+# Define constants
+CAN_MASK_STANDARD = 0x7FF
+
+# CAN filter definitions - using proper CanFilter objects
+CAN_FILTERS = [
+    CanFilter(can_id=0x3E0, can_mask=CAN_MASK_STANDARD),  # Coolant Temperature
+    CanFilter(can_id=0x3E1, can_mask=CAN_MASK_STANDARD),  # Oil Temperature
+    CanFilter(can_id=0x3E9, can_mask=CAN_MASK_STANDARD),  # Fuel Level
+    CanFilter(
+        can_id=0x3EB, can_mask=CAN_MASK_STANDARD
+    ),  # ABS Error and Check Engine Light
+]
+
 try:
-    can0.set_filters(
-        [
-            {
-                "can_id": 0x3E0,
-                "can_mask": 0x7FF,
-                "extended": False,
-            },  # Coolant Temperature
-            {"can_id": 0x3E1, "can_mask": 0x7FF, "extended": False},  # Oil Temperature
-            {"can_id": 0x3E9, "can_mask": 0x7FF, "extended": False},  # Fuel Level
-            {
-                "can_id": 0x3EB,
-                "can_mask": 0x7FF,
-                "extended": False,
-            },  # ABS Error and Check Engine Light
-        ]
-    )
+    if can0 is None:
+        raise ValueError("CAN interface not initialized")
+
+    can0.set_filters(CAN_FILTERS)
+
     logger.info("CAN filters set up successfully")
-except Exception as e:
+
+except (AttributeError, ValueError, RuntimeError) as e:
     logger.error(f"Failed to set up CAN filters: {e}")
     os.system("sudo ifconfig can0 down")
     sys.exit(1)
