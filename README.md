@@ -1,5 +1,7 @@
 # pi-telemetry
-Gathers telemetry via CAN BUS, and sends over APRS
+Gathers telemetry via CAN BUS, and writes to a file.
+
+Eventually, this data will be transmitted via APRS using [Direwolf](https://github.com/wb2osz/direwolf).
 
 ## Requirements
 
