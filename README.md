@@ -1,5 +1,5 @@
 # pi-telemetry
-Gathers telemetry via CAN BUS from a Haltech ECU, and writes to a file.
+Gathers telemetry via CAN BUS from a Haltech ECU and writes to a file.
 
 Eventually, this data will be transmitted via APRS using [Direwolf](https://github.com/wb2osz/direwolf).
 
