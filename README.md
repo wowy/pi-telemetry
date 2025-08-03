@@ -13,6 +13,11 @@ Eventually, this data will be transmitted via APRS using [Direwolf](https://gith
 - Python 3.9
   - python3-black
   - python3-can
+- Add the following lines to your Raspberry Pi boot config:
+  ```
+  dtparam=spi=on
+  dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25,spimaxfrequency=1000000
+  ```
 
 ## Usage
 
