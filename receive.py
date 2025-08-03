@@ -1,6 +1,5 @@
 import os
 import can
-from can.typechecking import CanFilter
 import time
 import logging
 import sys
@@ -22,9 +21,7 @@ try:
     os.system("sudo ifconfig can0 txqueuelen 65536")
     os.system("sudo ifconfig can0 up")
 
-    can0 = can.interface.Bus(
-        channel="can0", interface="socketcan"
-    )  # Updated to use 'interface' instead of deprecated 'bustype'
+    can0 = can.interface.Bus(channel="can0", interface="socketcan")
     logger.info("CAN interface initialized successfully")
 except Exception as e:
     logger.error(f"Failed to initialize CAN interface: {e}")
@@ -48,7 +45,7 @@ try:
 
     # Create an instance of the CANParser
     parser = CANParser(can_interface=can0, logger=logger)
-    
+
     # Create an instance of the CSVWriter
     csv_writer = CSVWriter(filename="telemetry_data.csv", logger=logger)
 
@@ -57,7 +54,7 @@ try:
         try:
             # Parse messages and get the current values
             values = parser.parse_messages(timeout=10.0)
-            
+
             # Write the values to the CSV file
             if values:
                 csv_writer.write_values(values)
