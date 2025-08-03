@@ -5,6 +5,7 @@ import time
 import logging
 import sys
 from can_parser import CANParser, CAN_FILTERS
+from csv_writer import CSVWriter
 
 # Set up logging
 logging.basicConfig(
@@ -47,12 +48,19 @@ try:
 
     # Create an instance of the CANParser
     parser = CANParser(can_interface=can0, logger=logger)
+    
+    # Create an instance of the CSVWriter
+    csv_writer = CSVWriter(filename="telemetry_data.csv", logger=logger)
 
     # Main loop to continuously parse CAN messages
     while True:
         try:
             # Parse messages and get the current values
             values = parser.parse_messages(timeout=10.0)
+            
+            # Write the values to the CSV file
+            if values:
+                csv_writer.write_values(values)
 
         except can.CanError as e:
             logger.error(f"CAN error: {e}")
