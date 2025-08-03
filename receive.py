@@ -4,7 +4,7 @@ from can.typechecking import CanFilter
 import time
 import logging
 import sys
-from can_parser import CANParser
+from can_parser import CANParser, CAN_FILTERS
 
 # Set up logging
 logging.basicConfig(
@@ -28,16 +28,6 @@ try:
 except Exception as e:
     logger.error(f"Failed to initialize CAN interface: {e}")
     sys.exit(1)
-
-# Define constants
-CAN_MASK_STANDARD = 0x7FF
-
-# CAN filter definitions - using proper CanFilter objects
-CAN_FILTERS = [
-    CanFilter(can_id=0x3E0, can_mask=CAN_MASK_STANDARD),  # Coolant & Oil Temperature
-    CanFilter(can_id=0x3E2, can_mask=CAN_MASK_STANDARD),  # Fuel Level
-    CanFilter(can_id=0x3E4, can_mask=CAN_MASK_STANDARD),  # ABS Error and Check Engine Light
-]
 
 try:
     if can0 is None:
