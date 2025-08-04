@@ -17,10 +17,6 @@ logger = logging.getLogger(__name__)
 # Initialize CAN interface
 try:
     logger.info("Initializing CAN interface...")
-    os.system("sudo ip link set can0 type can bitrate 100000")
-    os.system("sudo ifconfig can0 txqueuelen 65536")
-    os.system("sudo ifconfig can0 up")
-
     can0 = can.interface.Bus(channel="can0", interface="socketcan")
     logger.info("CAN interface initialized successfully")
 except Exception as e:
@@ -37,7 +33,6 @@ try:
 
 except (AttributeError, ValueError, RuntimeError) as e:
     logger.error(f"Failed to set up CAN filters: {e}")
-    os.system("sudo ifconfig can0 down")
     sys.exit(1)
 
 try:
@@ -70,10 +65,4 @@ except KeyboardInterrupt:
 except Exception as e:
     logger.error(f"Program terminated due to error: {e}")
 finally:
-    try:
-        logger.info("Shutting down CAN interface...")
-        os.system("sudo ifconfig can0 down")
-        logger.info("CAN interface shut down successfully")
-    except Exception as e:
-        logger.error(f"Error shutting down CAN interface: {e}")
     logger.info("Program exited")

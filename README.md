@@ -21,7 +21,7 @@ Eventually, this data will be transmitted via APRS using [Direwolf](https://gith
 
 ## Usage
 
-`sudo python3 receive.py`
+`sudo ./startup.sh`
 
 ## Resources
 
