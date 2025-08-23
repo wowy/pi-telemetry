@@ -1,8 +1,9 @@
-import os
-import can
-import time
 import logging
 import sys
+import time
+
+import can
+
 from can_parser import CANParser, CAN_FILTERS
 from csv_writer import CSVWriter
 

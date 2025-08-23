@@ -1,7 +1,7 @@
 import csv
+import logging
 import os
 import tempfile
-import logging
 
 
 class CSVWriter:

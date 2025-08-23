@@ -1,6 +1,7 @@
+import logging
 import struct
 import time
-import logging
+
 from can.typechecking import CanFilter
 
 # Define constants

@@ -10,9 +10,11 @@ Eventually, this data will be transmitted via APRS using [Direwolf](https://gith
 - [Waveshare CAN Hat](https://www.waveshare.com/rs485-can-hat.htm)
 
 ### Software
-- Python 3.9
-  - python3-black
-  - python3-can
+- Python 3.9+
+- Python dependencies are declared in pyproject.toml. To install runtime dependencies:
+  - Using pip:
+    - Runtime only: `pip install .`
+    - Development (adds Black): `pip install -e .[dev]`
 - Add the following lines to your Raspberry Pi boot config:
   ```
   dtparam=spi=on
