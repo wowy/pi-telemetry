@@ -25,6 +25,10 @@ Eventually, this data will be transmitted via APRS using [Direwolf](https://gith
 
 `sudo ./startup.sh`
 
+This will write the data to a file, `telemetry_data.csv`, with a single line of values.
+Feel free to modify this to suit your needs; I only want the latest values for parsing using
+[Direwolf](https://github.com/wb2osz/direwolf) to send via [APRS](https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System).
+
 ## Resources
 
 - [Waveshare documentation and sample project](https://www.waveshare.com/wiki/RS485_CAN_HAT) (the basis for this repo).
