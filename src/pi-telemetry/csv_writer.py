@@ -41,7 +41,13 @@ class CSVWriter:
 
                 # Write the header and the values
                 writer.writeheader()
-                writer.writerow(values)
+
+                # Format float values to two decimal places before writing
+                formatted_values = {
+                    k: (f"{v:.2f}" if isinstance(v, float) else v)
+                    for k, v in values.items()
+                }
+                writer.writerow(formatted_values)
 
                 # Ensure all data is written to disk
                 temp_file.flush()
