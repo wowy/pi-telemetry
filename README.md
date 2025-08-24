@@ -12,10 +12,12 @@ Eventually, this data will be transmitted via APRS using [Direwolf](https://gith
 ### Software
 - Python 3.9+
 - Python dependencies are declared in pyproject.toml. To install runtime dependencies:
+  - On Raspberry Pi OS
+    - `sudo apt install python3-can`
   - Using pip:
     - Runtime only: `pip install .`
     - Development (adds Black): `pip install -e .[dev]`
-- Add the following lines to your Raspberry Pi boot config:
+- Add the following lines to your Raspberry Pi boot config (`/boot/firmware/config.txt`), then reboot.
   ```
   dtparam=spi=on
   dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25,spimaxfrequency=1000000
@@ -23,11 +25,18 @@ Eventually, this data will be transmitted via APRS using [Direwolf](https://gith
 
 ## Usage
 
-`sudo ./startup.sh`
+`./startup.sh`
 
 This will write the data to a file, `telemetry_data.csv`, with a single line of values.
 Feel free to modify this to suit your needs; I only want the latest values for parsing using
 [Direwolf](https://github.com/wb2osz/direwolf) to send via [APRS](https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System).
+
+### Example output
+
+```
+coolant_temp_celsius,oil_temp_celsius,fuel_level_gallons,abs_error,check_engine
+15.35,20.55,2.91,False,False
+```
 
 ## Resources
 

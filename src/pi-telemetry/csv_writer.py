@@ -43,10 +43,7 @@ class CSVWriter:
                 writer.writeheader()
 
                 # Format float values to two decimal places before writing
-                formatted_values = {
-                    k: (f"{v:.2f}" if isinstance(v, float) else v)
-                    for k, v in values.items()
-                }
+                formatted_values = {k: (f"{v:.2f}" if isinstance(v, float) else v) for k, v in values.items()}
                 writer.writerow(formatted_values)
 
                 # Ensure all data is written to disk
@@ -59,7 +56,7 @@ class CSVWriter:
             # Atomically replace the target file with the temporary file
             os.replace(temp_filename, self.filename)
 
-            self.logger.info(f"Successfully wrote telemetry data to {self.filename}")
+            self.logger.debug(f"Successfully wrote telemetry data to {self.filename}")
 
         except Exception as e:
             self.logger.error(f"Error writing telemetry data to CSV: {e}")
