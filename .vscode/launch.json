@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:pi-telemetry}",
+            "name": "Debug pi-telemetry",
+            "target": "pi-telemetry",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug pi-telemetry"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:pi-telemetry}",
+            "name": "Release pi-telemetry",
+            "target": "pi-telemetry",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release pi-telemetry"
+        }
+    ]
+}
