@@ -6,6 +6,7 @@ import PackageDescription
 let package = Package(
     name: "pi-telemetry",
     dependencies: [
+        .package(url: "https://github.com/AutomotiveSwift/Swift-SocketCAN.git", from: "0.9.0"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.7.0"),
     ],
     targets: [
@@ -14,8 +15,8 @@ let package = Package(
         .executableTarget(
             name: "pi-telemetry",
             dependencies: [
-                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
-        ),
+        )
     ]
 )

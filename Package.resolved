@@ -1,5 +1,5 @@
 {
-  "originHash" : "82eec4df3c343e9b85e904b2f0bac4dbc490ef425b5a74a3973b566bcf120245",
+  "originHash" : "1bcde5dc72a55ff35099422bd52936a8282088d55b2c629501bd594fe2a58c21",
   "pins" : [
     {
       "identity" : "swift-argument-parser",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
         "version" : "1.7.0"
+      }
+    },
+    {
+      "identity" : "swift-socketcan",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AutomotiveSwift/Swift-SocketCAN.git",
+      "state" : {
+        "revision" : "6c55b4f6c310b53505c4744fead179b4460ee83f",
+        "version" : "0.9.0"
       }
     }
   ],
